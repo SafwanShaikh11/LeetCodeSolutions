@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,16 +10,15 @@ public class Problem2 {
 
     }
 
-    public List<List<Integer>> threeSum(int[] nums) {
+    class Solution {
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> res = new ArrayList<>();
+            Arrays.sort(nums);
 
-        int result[];
-        Arrays.sort(nums);
-
-
-        for (int i = 0; i < nums.length; i++) {
-            if (i > 0 & nums[i] == nums[i + 1]) {
-                continue;
-
+            for (int i = 0; i < nums.length; i++) {
+                if (i > 0 & nums[i] == nums[i + 1]) {
+                    continue;
+                }
                 int j = i + 1;
                 int k = nums.length - 1;
 
@@ -30,12 +30,21 @@ public class Problem2 {
                         k -= 1;
                     } else if (total < 0) {
                         j += 1;
-                    } else{
-                        result.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    } else {
+                        res.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                        j += 1;
+
+
+                        while (nums[j] == nums[j - 1]) {
+                            j += 1;
+                        }
                     }
+
                 }
-                return null;
             }
+            return res;
         }
     }
 }
+
+
